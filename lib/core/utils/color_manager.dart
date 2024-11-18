@@ -7,5 +7,6 @@ class ColorManager {
   static const Color backGround = Color(0xff121312);
   static const Color primary = Color(0xffFFBB3B);
   static const Color white = Color(0xffFFFFFF);
+  static const Color gray = Color(0xff282A28);
   static const Color transparent = Colors.transparent;
 }

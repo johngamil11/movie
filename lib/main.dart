@@ -1,12 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie/config/routes/routes.dart';
+import 'package:movie/feather/home_screen/presentation/manager/cubit/home_screen_cubit.dart';
 
 import 'config/routes/route_generator.dart';
+import 'core/di/di.dart';
+import 'my_bloc_observer.dart';
 
 void main() {
-  runApp(MyApp());
+  Bloc.observer = MyBlocObserver();
+  configureDependencies();
+
+  runApp(MultiBlocProvider(providers: [
+    BlocProvider<HomeScreenViewModel>(
+      create: (context) => getIt<HomeScreenViewModel>(),
+    ),
+  ], child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
