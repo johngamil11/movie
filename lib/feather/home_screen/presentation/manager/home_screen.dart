@@ -15,7 +15,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeScreenViewModel, HomeScreenState>(
-      bloc: HomeScreenViewModel.get(context)..getPopularMovies(),
+      bloc: HomeScreenViewModel.get(context)
+        ..getPopularMovies()
+        ..getReleasesMovies(),
       builder: (context, state) {
         return Scaffold(
             backgroundColor: ColorManager.backGround,
@@ -33,7 +35,8 @@ class HomeScreen extends StatelessWidget {
                       width: double.infinity,
                       height: 300.h,
                       color: ColorManager.gray,
-                      child: MoviesList(title: 'New Releases',),
+                      child: MoviesList(title: 'New Releases',
+                        movieDetails:,),
                     ),
                     SizedBox(height: 30,),
                     Container(

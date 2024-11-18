@@ -16,3 +16,19 @@ final class HomeScreenErrorState extends HomeScreenState {
   Failures failures ;
   HomeScreenErrorState ({required this.failures});
 }
+
+final class ReleasesLoadingState extends HomeScreenState {}
+
+final class ReleasesSuccessState extends HomeScreenState {
+  // MovieDetailsEntity movieDetails ;
+// GetPopularMoviesResponseEntity getPopularMoviesResponseEntity ;
+  List<ReleasesMoviesEntity> releaseMovieList;
+
+  ReleasesSuccessState({required this.releaseMovieList});
+}
+
+final class ReleasesErrorState extends HomeScreenState {
+  Failures failures;
+
+  ReleasesErrorState({required this.failures});
+}

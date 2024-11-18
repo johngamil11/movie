@@ -2,12 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie/core/utils/assets_image.dart';
 import 'package:movie/core/utils/color_manager.dart';
+import 'package:movie/feather/home_screen/domain/entities/GetReleasesResponseEntity.dart';
+import 'package:movie/feather/home_screen/presentation/manager/cubit/home_screen_cubit.dart';
 
 import '../../../../core/utils/styles.dart';
 
 class MoviesList extends StatelessWidget {
+  ReleasesMoviesEntity movieDetails;
   String title ;
-  MoviesList({required this.title});
+
+  MoviesList({required this.title, required this.movieDetails});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -36,8 +40,9 @@ class MoviesList extends StatelessWidget {
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(15),
-                                child: Image.asset('assets/images/Imagecover.png'),
-                              ),
+                              child:
+                                  Image.network(movieDetails.posterPath ?? ''),
+                            ),
                               InkWell(
                                   onTap: (){},
                                   child: Image.asset(AssetsImage.bookMark , width: 60 , height: 60,)),

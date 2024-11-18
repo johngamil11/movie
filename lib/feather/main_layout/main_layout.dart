@@ -32,7 +32,7 @@ class _MainLayoutState extends State<MainLayout> {
         buttonBackgroundColor: ColorManager.primary ,
         backgroundColor: ColorManager.transparent,
 
-        height: 70.h,
+        height: 70,
         items: <Widget>[
           Image.asset(AssetsImage.homeIcon),
           Image.asset(AssetsImage.searchIcon),

@@ -21,6 +21,8 @@ import '../../feather/home_screen/domain/repositories/home_repository.dart'
     as _i6;
 import '../../feather/home_screen/domain/use_cases/get_popular_movies_use_case.dart'
     as _i145;
+import '../../feather/home_screen/domain/use_cases/get_releases_movies_use_case.dart'
+    as _i955;
 import '../../feather/home_screen/presentation/manager/cubit/home_screen_cubit.dart'
     as _i602;
 import '../api/api_manager.dart' as _i1047;
@@ -44,8 +46,13 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i145.GetPopularMoviesUseCase>(() =>
         _i145.GetPopularMoviesUseCase(
             homeRepository: gh<_i6.HomeRepository>()));
+    gh.factory<_i955.GetReleasesMoviesUseCase>(() =>
+        _i955.GetReleasesMoviesUseCase(
+            homeRepository: gh<_i6.HomeRepository>()));
     gh.factory<_i602.HomeScreenViewModel>(() => _i602.HomeScreenViewModel(
-        getPopularMoviesUseCase: gh<_i145.GetPopularMoviesUseCase>()));
+          getPopularMoviesUseCase: gh<_i145.GetPopularMoviesUseCase>(),
+          getReleasesMoviesUseCase: gh<_i955.GetReleasesMoviesUseCase>(),
+        ));
     return this;
   }
 }

@@ -6,6 +6,9 @@ import 'package:movie/core/errors/failurs.dart';
 import 'package:movie/feather/home_screen/data/data_sources/home_data_source.dart';
 import 'package:movie/feather/home_screen/data/models/GetPopularMoviesResponseDto.dart';
 import 'package:movie/feather/home_screen/domain/entities/GetPopularMoviesResponseEntity.dart';
+import 'package:movie/feather/home_screen/domain/entities/GetReleasesResponseEntity.dart';
+
+import '../../models/GetReleasesResponseDto.dart';
 
 @Injectable(as:HomeDataSource )
 class HomeDataSourceImp implements HomeDataSource {
@@ -34,13 +37,35 @@ class HomeDataSourceImp implements HomeDataSource {
           return Left(serverError(errorMessage: getPopularMovies.status_message!));
         }
       }
-      // else {
+
+  @override
+  Future<Either<Failures, GetReleasesResponseDto>> getReleasesMovies() async {
+    apiManager.getData(EndPoint.releases);
+    // try {
+    //
+    //   List<ConnectivityResult> connectivityResult =
+    //       await Connectivity().checkConnectivity();
+    //   if (connectivityResult.contains(ConnectivityResult.mobile) ||
+    //       connectivityResult.contains(ConnectivityResult.wifi)) {
+    var response = await apiManager.getData(
+      EndPoint.releases,
+    );
+
+    var getReleasesMovies = GetReleasesResponseDto.fromJson(response.data);
+    if (response.statusCode! >= 200 && response.statusCode! < 401) {
+      return Right(getReleasesMovies);
+    } else {
+      return Left(serverError(errorMessage: getReleasesMovies.status_message!));
+    }
+  }
+}
+// else {
       //   return Left(NetworkError(
       //       errorMessage: 'no internet connection , please try again'));
       // }
     // } catch (e) {
     //   return Left(Failures(errorMessage: e.toString()));
-    }
-  // }
+
+// }
 
 // }
