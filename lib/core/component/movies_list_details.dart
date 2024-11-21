@@ -3,11 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie/core/utils/assets_image.dart';
 import 'package:movie/core/utils/color_manager.dart';
 
+import '../../feather/home_screen/domain/entities/GetReleasesResponseEntity.dart';
+import '../utils/constants.dart';
 import '../utils/styles.dart';
 
 class MoviesListDetails extends StatelessWidget {
+  List<ReleasesMoviesEntity> moviesReleaseList ;
   String title ;
-  MoviesListDetails({required this.title});
+  MoviesListDetails({required this.title , required this.moviesReleaseList});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -19,7 +22,7 @@ class MoviesListDetails extends StatelessWidget {
           Expanded(
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
-                itemCount: 20,
+                itemCount: moviesReleaseList.length,
                 itemBuilder: (context , index) {
                 return  Container(
                   margin: EdgeInsets.all(4),
@@ -36,7 +39,7 @@ class MoviesListDetails extends StatelessWidget {
                             children: [
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(15),
-                                child: Image.asset('assets/images/Imagecover.png'),
+                                child: Image.network(AppConstants.image_link + moviesReleaseList[index].posterPath! , fit: BoxFit.fill,),
                               ),
                               InkWell(
                                   onTap: (){},
