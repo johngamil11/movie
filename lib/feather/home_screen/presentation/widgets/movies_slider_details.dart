@@ -42,6 +42,7 @@ MoviesSliderDetails ({required this.movieDetailsEntity});
                     Container(
                         width: 200,
                         child: Text(
+                          // 'Movies Name'
                           movieDetailsEntity.title ??''
                           // movieDetailsEntity.title ??''
                           ,
@@ -49,6 +50,7 @@ MoviesSliderDetails ({required this.movieDetailsEntity});
                     Container(
                         width: 200,
                         child: Text(
+                          // '2024'
                         movieDetailsEntity.releaseDate!.substring(0, 4) ?? ''
                         // movieDetailsEntity.title ??''
                           ,

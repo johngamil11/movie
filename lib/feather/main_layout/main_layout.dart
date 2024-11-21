@@ -5,6 +5,7 @@ import 'package:movie/core/utils/assets_image.dart';
 import 'package:movie/core/utils/color_manager.dart';
 import 'package:movie/feather/browse_screen/presentation/manager/browse_screen.dart';
 import 'package:movie/feather/home_screen/presentation/manager/home_screen.dart';
+import 'package:movie/feather/home_screen/presentation/manager/homescreen2.dart';
 import 'package:movie/feather/search_screen/presentation/manager/search_screen.dart';
 import 'package:movie/feather/watchlist_screen/presentation/manager/watchlist_screen.dart';
 import 'package:movie/main.dart';

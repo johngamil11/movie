@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie/config/routes/routes.dart';
+import 'package:movie/feather/Movie_details/presentation/manager/cubit/movie_details_screen.dart';
 import 'package:movie/feather/main_layout/main_layout.dart';
 
 class RouteGenerator {
@@ -7,6 +8,9 @@ class RouteGenerator {
     switch (setting.name) {
       case Routes.homeScreen:
         return MaterialPageRoute(builder: (_) => MainLayout());
+
+        case Routes.detailsMovieScreen:
+        return MaterialPageRoute(builder: (_) => MovieDetailsScreen());
 
       default:
         return unDefinedRoute();
