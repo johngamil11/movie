@@ -10,14 +10,16 @@ import '../../../../core/utils/constants.dart';
 import '../../../../core/utils/styles.dart';
 
 class MovieListDetails extends StatelessWidget {
-  List<RecommendedMovieEntity> moviesRecommendedList ;
+  List<RecommendedMovieEntity> moviesRecommendedList=[] ;
   String title ;
   String image ;
   String rate ;
   String movieName ;
   String year ;
 
-  MovieListDetails({required this.title, required this.moviesRecommendedList , required this.image,
+  MovieListDetails({required this.title,
+    // required this.moviesRecommendedList ,
+    required this.image,
   required this.movieName , required this.year , required this.rate
   });
   @override
@@ -50,6 +52,7 @@ class MovieListDetails extends StatelessWidget {
           width: 100.w,
             child: Text(movieName,style: Styles.regularStyle.copyWith(fontSize: 14), maxLines: 2,)),
         Text(year.substring(0,4),style: Styles.regularStyle.copyWith(fontSize: 14),),
+
 
       ],
     );

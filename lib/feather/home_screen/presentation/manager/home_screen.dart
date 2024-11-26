@@ -6,11 +6,14 @@ import 'package:movie/core/component/Movie_list_details.dart';
 import 'package:movie/core/utils/assets_image.dart';
 import 'package:movie/core/utils/color_manager.dart';
 import 'package:movie/core/utils/styles.dart';
+import 'package:movie/feather/Movie_details/domain/entities/GetMovieDetailsResponseEntity.dart';
+import 'package:movie/feather/Movie_details/presentation/manager/movie_details_screen.dart';
 import 'package:movie/feather/home_screen/presentation/manager/cubit/home_screen_cubit.dart';
 import 'package:movie/feather/home_screen/presentation/widgets/movies_list.dart';
 import 'package:movie/feather/home_screen/presentation/widgets/slider_widget.dart';
 
 import '../../../../core/component/movies_list_details.dart';
+import '../../../Movie_details/presentation/manager/cubit/movie_details_cubit.dart';
 
 class HomeScreen extends StatelessWidget {
 
@@ -22,6 +25,7 @@ class HomeScreen extends StatelessWidget {
         ..getReleasesMovies()
       ..getRecommendedMovies(),
       builder: (context, state) {
+        // GetMovieDetailsResponseEntity getMovieDetailsResponseEntity ;
         return Scaffold(
             backgroundColor: ColorManager.backGround,
             body:
@@ -31,7 +35,6 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   // SliderWidget() ,
                   SliderWidget(movieDetailsList: HomeScreenViewModel.get(context).movieList),
-
                   SizedBox(height: 25.h,),
                   Container(width: double.infinity,
                       padding: EdgeInsets.all(10),
@@ -58,8 +61,11 @@ class HomeScreen extends StatelessWidget {
 
                               InkWell(
                                   onTap: () {
-                                    Navigator.of(context).pushNamed(Routes.detailsMovieScreen ,
-                                        arguments:HomeScreenViewModel.get(context).releaseMovieList );
+                                    Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) => MovieDetailsScreen(
+                                          movieId: HomeScreenViewModel.get(context).releaseMovieList[index].id.toString(),
+                                                ),
+                                        ));
                                   },
                                   child: MoviesList(
                                     title: 'New Releases',
@@ -101,12 +107,18 @@ class HomeScreen extends StatelessWidget {
                         itemBuilder: (context, index) =>
 
                             InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => MovieDetailsScreen(
+                                      movieId: HomeScreenViewModel.get(context).recommendedMovieList[index].id.toString(),
+                                    ),
+                                  ));
+                                },
                                 child: MovieListDetails(
                                   movieName: HomeScreenViewModel.get(context).recommendedMovieList[index].title ??'',
                                   title: 'New Releases',
                                   rate: HomeScreenViewModel.get(context).recommendedMovieList[index].voteAverage.toString().substring(0,3),
-                                  moviesRecommendedList: HomeScreenViewModel.get(context).recommendedMovieList,
+                                  // moviesRecommendedList: HomeScreenViewModel.get(context).recommendedMovieList,
                                   year: HomeScreenViewModel.get(context).recommendedMovieList[index].releaseDate.toString(),
                                   image: HomeScreenViewModel.get(context).recommendedMovieList[index]
                                       .posterPath.toString(),
@@ -121,17 +133,10 @@ class HomeScreen extends StatelessWidget {
                       )
                   ),
 
-                  // Container(
-                  //   width: double.infinity,
-                  //   height: 380.h,
-                  //   color: ColorManager.gray,
-                  //   child: MoviesListDetails(title: 'Recomended',),
-                  // ),
-
                 ],
               ),
             )
-        : CircularProgressIndicator()
+        : Center(child: CircularProgressIndicator(color: ColorManager.primary,))
         );
 
       },
