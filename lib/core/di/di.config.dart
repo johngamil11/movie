@@ -11,6 +11,20 @@
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
+import '../../feather/browse_screen/data/data_sources/get_genres_browse_data_sourece.dart'
+    as _i151;
+import '../../feather/browse_screen/data/data_sources/imp/get_genres_browse_data_sourece_imp.dart'
+    as _i346;
+import '../../feather/browse_screen/data/repositories/getGenresImp.dart'
+    as _i731;
+import '../../feather/browse_screen/domain/repositories/browse_repository.dart'
+    as _i722;
+import '../../feather/browse_screen/domain/use_cases/get_filter_browse_use_case.dart'
+    as _i129;
+import '../../feather/browse_screen/domain/use_cases/get_genres_browse_use_case.dart'
+    as _i158;
+import '../../feather/browse_screen/presentation/manager/cubit/browse_screen_view_model.dart'
+    as _i36;
 import '../../feather/home_screen/data/data_sources/home_data_source.dart'
     as _i726;
 import '../../feather/home_screen/data/data_sources/imp/home_data_source_imp.dart'
@@ -59,8 +73,13 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i812.HomeDataSourceImp(apiManager: gh<_i1047.ApiManager>()));
     gh.factory<_i25.MovieDetailsDataSource>(() =>
         _i735.MovieDetailsDataSourceImp(apiManager: gh<_i1047.ApiManager>()));
+    gh.factory<_i151.GetGenresBrowseDataSource>(() =>
+        _i346.GetGenresBrowseDataSourceImp(
+            apiManager: gh<_i1047.ApiManager>()));
     gh.factory<_i6.HomeRepository>(() =>
         _i1004.HomeRepositoryimp(homeDataSource: gh<_i726.HomeDataSource>()));
+    gh.factory<_i722.GetGenresRepository>(() => _i731.GetGenresRepositoryImp(
+        genresBrowseDataSource: gh<_i151.GetGenresBrowseDataSource>()));
     gh.factory<_i574.MovieDetailsRepository>(() =>
         _i446.MovieDetailsRepositoryImp(
             movieDetailsDataSource: gh<_i25.MovieDetailsDataSource>()));
@@ -79,6 +98,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i697.GetSimilarMoviesUseCase>(() =>
         _i697.GetSimilarMoviesUseCase(
             movieDetailsRepository: gh<_i574.MovieDetailsRepository>()));
+    gh.factory<_i158.GetGenresBrowseUseCase>(() => _i158.GetGenresBrowseUseCase(
+        browseRepository: gh<_i722.GetGenresRepository>()));
+    gh.factory<_i129.GetFilterBrowseUseCase>(() => _i129.GetFilterBrowseUseCase(
+        browseRepository: gh<_i722.GetGenresRepository>()));
     gh.factory<_i602.HomeScreenViewModel>(() => _i602.HomeScreenViewModel(
           getPopularMoviesUseCase: gh<_i145.GetPopularMoviesUseCase>(),
           getReleasesMoviesUseCase: gh<_i955.GetReleasesMoviesUseCase>(),
@@ -87,6 +110,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i329.MovieDetailsViewModel>(() => _i329.MovieDetailsViewModel(
           getMoviesDetailsUseCase: gh<_i690.GetMoviesDetailsUseCase>(),
           getSimilarMoviesUseCase: gh<_i697.GetSimilarMoviesUseCase>(),
+        ));
+    gh.factory<_i36.BrowseScreenViewModel>(() => _i36.BrowseScreenViewModel(
+          genresBrowseUseCase: gh<_i158.GetGenresBrowseUseCase>(),
+          filterUseCase: gh<_i129.GetFilterBrowseUseCase>(),
         ));
     return this;
   }

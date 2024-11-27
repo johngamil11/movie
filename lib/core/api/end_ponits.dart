@@ -7,4 +7,6 @@ class EndPoint {
 ///https://api.themoviedb.org/3/movie/{movie_id}/similar
   static const String movieSimilar1 = '/3/movie/';
   static const String movieSimilar2 = '/similar';
+  static const String genre = '/3/genre/movie/list';
+  static const String browseFilter = '/3/discover/movie';
 }

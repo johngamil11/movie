@@ -13,7 +13,6 @@ class MovieDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print( ' your id : $movieId'); //to know if id already send or not
     return BlocBuilder<MovieDetailsViewModel, MovieDetailsState>(
       bloc: MovieDetailsViewModel.get(context)
         ..getMoviesDetails(movieId)..getSimilarMovies(movieId)

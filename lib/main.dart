@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:movie/config/routes/routes.dart';
 import 'package:movie/feather/Movie_details/presentation/manager/cubit/movie_details_cubit.dart';
+import 'package:movie/feather/browse_screen/presentation/manager/cubit/browse_screen_view_model.dart';
 import 'package:movie/feather/home_screen/presentation/manager/cubit/home_screen_cubit.dart';
 
 import 'config/routes/route_generator.dart';
@@ -20,6 +21,9 @@ void main() {
     ),
     BlocProvider<MovieDetailsViewModel>(
       create: (context) => getIt<MovieDetailsViewModel>(),
+    ),
+    BlocProvider<BrowseScreenViewModel>(
+      create: (context) => getIt<BrowseScreenViewModel>(),
     ),
   ], child: MyApp()));
 }
