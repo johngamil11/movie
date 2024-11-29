@@ -16,20 +16,26 @@ class MoviesList extends StatelessWidget {
   MoviesList({required this.title, required this.moviesReleaseList , required this.image});
   @override
   Widget build(BuildContext context) {
-                return  Container(
-                  clipBehavior: Clip.antiAlias,
-                  height: 180,
-                  width: 120,
-                  margin: EdgeInsets.all(4),
-                  decoration: BoxDecoration(
-                    color: Colors.yellowAccent,
-                    borderRadius: BorderRadius.circular(25)
-                  ),
-                  child: Image.network(
-                    // 'assets/images/Imagecover.png'
-                      AppConstants.image_link +image,
-                    fit: BoxFit.fill,
-                  ),
+                return  Stack(
+                  children: [
+                    Container(
+                      clipBehavior: Clip.antiAlias,
+                      height: 180,
+                      width: 120,
+                      margin: EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        color: Colors.yellowAccent,
+                        borderRadius: BorderRadius.circular(25)
+                      ),
+                      child: Image.network(
+                        // 'assets/images/Imagecover.png'
+                          AppConstants.image_link +image,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+
+
+                  ],
                 );
 
   }

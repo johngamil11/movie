@@ -9,4 +9,5 @@ class EndPoint {
   static const String movieSimilar2 = '/similar';
   static const String genre = '/3/genre/movie/list';
   static const String browseFilter = '/3/discover/movie';
+  static const String search = '/3/search/movie';
 }

@@ -6,6 +6,7 @@ import 'package:movie/config/routes/routes.dart';
 import 'package:movie/feather/Movie_details/presentation/manager/cubit/movie_details_cubit.dart';
 import 'package:movie/feather/browse_screen/presentation/manager/cubit/browse_screen_view_model.dart';
 import 'package:movie/feather/home_screen/presentation/manager/cubit/home_screen_cubit.dart';
+import 'package:movie/feather/search_screen/presentation/manager/cubit/search_cubit.dart';
 
 import 'config/routes/route_generator.dart';
 import 'core/di/di.dart';
@@ -25,6 +26,9 @@ void main() {
     BlocProvider<BrowseScreenViewModel>(
       create: (context) => getIt<BrowseScreenViewModel>(),
     ),
+    BlocProvider<SearchViewModel>(
+      create: (context) => getIt<SearchViewModel>(),
+    ),
   ], child: MyApp()));
 }
 
@@ -40,8 +44,10 @@ class MyApp extends StatelessWidget {
       // Use builder only if you need to use library outside ScreenUtilInit context
       builder: (_, child) {
         return MaterialApp(
+          locale: Locale('en'),
           debugShowCheckedModeBanner: false,
           // You can use the library anywhere in the app even in theme
+
           home: child,
           onGenerateRoute: RouteGenerator.getRoute,
           initialRoute: Routes.homeScreen,

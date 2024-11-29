@@ -55,6 +55,18 @@ import '../../feather/Movie_details/domain/use_cases/get_similar_movies_use_case
     as _i697;
 import '../../feather/Movie_details/presentation/manager/cubit/movie_details_cubit.dart'
     as _i329;
+import '../../feather/search_screen/data/data_sources/imp/search_data_source_imp.dart'
+    as _i720;
+import '../../feather/search_screen/data/data_sources/search_data_source.dart'
+    as _i399;
+import '../../feather/search_screen/data/repositories/searchRepositoryimp.dart'
+    as _i447;
+import '../../feather/search_screen/domain/repositories/search_repository.dart'
+    as _i789;
+import '../../feather/search_screen/domain/use_cases/search_use_case.dart'
+    as _i447;
+import '../../feather/search_screen/presentation/manager/cubit/search_cubit.dart'
+    as _i677;
 import '../api/api_manager.dart' as _i1047;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -69,17 +81,25 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     gh.singleton<_i1047.ApiManager>(() => _i1047.ApiManager());
+    gh.factory<_i399.SearchDatasource>(
+        () => _i720.SearchDataSourceImp(apiManager: gh<_i1047.ApiManager>()));
     gh.factory<_i726.HomeDataSource>(
         () => _i812.HomeDataSourceImp(apiManager: gh<_i1047.ApiManager>()));
+    gh.factory<_i789.SearchRepository>(() => _i447.SearchRepositoryImp(
+        searchDatasource: gh<_i399.SearchDatasource>()));
     gh.factory<_i25.MovieDetailsDataSource>(() =>
         _i735.MovieDetailsDataSourceImp(apiManager: gh<_i1047.ApiManager>()));
     gh.factory<_i151.GetGenresBrowseDataSource>(() =>
         _i346.GetGenresBrowseDataSourceImp(
             apiManager: gh<_i1047.ApiManager>()));
+    gh.factory<_i447.SearchUseCase>(() =>
+        _i447.SearchUseCase(searchRepository: gh<_i789.SearchRepository>()));
     gh.factory<_i6.HomeRepository>(() =>
         _i1004.HomeRepositoryimp(homeDataSource: gh<_i726.HomeDataSource>()));
     gh.factory<_i722.GetGenresRepository>(() => _i731.GetGenresRepositoryImp(
         genresBrowseDataSource: gh<_i151.GetGenresBrowseDataSource>()));
+    gh.factory<_i677.SearchViewModel>(
+        () => _i677.SearchViewModel(searchUseCase: gh<_i447.SearchUseCase>()));
     gh.factory<_i574.MovieDetailsRepository>(() =>
         _i446.MovieDetailsRepositoryImp(
             movieDetailsDataSource: gh<_i25.MovieDetailsDataSource>()));

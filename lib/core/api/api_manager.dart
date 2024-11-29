@@ -13,11 +13,14 @@ class ApiManager {
   }
 
   Future<Response> getData(String endPoint,
-      {Map<String, dynamic>? headers, Map<String, dynamic>? body}) {
+      {Map<String, dynamic>? headers, Map<String, dynamic>? body , String? query , String? language}) {
     return dio.get(AppConstants.baseUrl + endPoint ,
         data: body,
         queryParameters: {
-      'api_key' :'f104ae6f88a48446aeb2e4802e8907f7'
+      'api_key' :'f104ae6f88a48446aeb2e4802e8907f7' ,
+          'query' :query,
+          'language' : 'en-US'
+
         },
         options: Options(headers: headers, validateStatus: (status) => true));
   }

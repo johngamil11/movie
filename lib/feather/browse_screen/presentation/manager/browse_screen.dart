@@ -9,12 +9,21 @@ import 'package:movie/feather/browse_screen/presentation/pages/browse_filter_scr
 import 'package:movie/feather/browse_screen/presentation/widgets/browse_Icon.dart';
 import 'package:movie/feather/home_screen/presentation/manager/cubit/home_screen_cubit.dart';
 
-class BrowseScreen extends StatelessWidget {
+class BrowseScreen extends StatefulWidget {
+  @override
+  State<BrowseScreen> createState() => _BrowseScreenState();
+}
 
+class _BrowseScreenState extends State<BrowseScreen> {
+  @override
+  void initState(){
+    super.initState();
+    BrowseScreenViewModel.get(context).getGenresBrowse();
+  }
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BrowseScreenViewModel, BrowseScreenState>(
-      bloc: BrowseScreenViewModel.get(context)..getGenresBrowse(),
+      bloc: BrowseScreenViewModel.get(context),
       builder: (context, state) {
         return Scaffold(
           backgroundColor: ColorManager.backGround,
@@ -42,6 +51,7 @@ class BrowseScreen extends StatelessWidget {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (context) => BrowseFilterScreen(
                               movieId: state.genresList[index].id.toString(),
+                              title: state.genresList[index].name ??'no data',
 
                             )
                           ),);                        },
