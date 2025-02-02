@@ -9,6 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:get_it/get_it.dart' as _i174;
+import 'package:hive/hive.dart' as _i979;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../../feather/browse_screen/data/data_sources/get_genres_browse_data_sourece.dart'
@@ -67,20 +68,42 @@ import '../../feather/search_screen/domain/use_cases/search_use_case.dart'
     as _i447;
 import '../../feather/search_screen/presentation/manager/cubit/search_cubit.dart'
     as _i677;
+import '../../feather/watchlist_screen/data/data_sources/MovieLocalDataSource.dart'
+    as _i925;
+import '../../feather/watchlist_screen/data/data_sources/MovieLocalDataSourceImp.dart'
+    as _i6;
+import '../../feather/watchlist_screen/data/models/hive_module.dart' as _i201;
+import '../../feather/watchlist_screen/data/models/movie_model.dart' as _i346;
+import '../../feather/watchlist_screen/presentation/manager/cubit/watch_list_cubit.dart'
+    as _i700;
 import '../api/api_manager.dart' as _i1047;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
-  _i174.GetIt init({
+  Future<_i174.GetIt> init({
     String? environment,
     _i526.EnvironmentFilter? environmentFilter,
-  }) {
+  }) async {
     final gh = _i526.GetItHelper(
       this,
       environment,
       environmentFilter,
     );
+    final hiveModule = _$HiveModule();
+    await gh.factoryAsync<_i979.Box<_i346.MovieModel>>(
+      () => hiveModule.moviesBox,
+      preResolve: true,
+    );
     gh.singleton<_i1047.ApiManager>(() => _i1047.ApiManager());
+    gh.factory<_i346.MovieModel>(() => _i346.MovieModel(
+          imageUrl: gh<String>(),
+          title: gh<String>(),
+          description: gh<String>(),
+          year: gh<String>(),
+          isFavorite: gh<bool>(),
+        ));
+    gh.factory<_i925.MovieLocalDataSource>(
+        () => _i6.MovieLocalDataSourceImp(gh<_i979.Box<_i346.MovieModel>>()));
     gh.factory<_i399.SearchDatasource>(
         () => _i720.SearchDataSourceImp(apiManager: gh<_i1047.ApiManager>()));
     gh.factory<_i726.HomeDataSource>(
@@ -98,6 +121,8 @@ extension GetItInjectableX on _i174.GetIt {
         _i1004.HomeRepositoryimp(homeDataSource: gh<_i726.HomeDataSource>()));
     gh.factory<_i722.GetGenresRepository>(() => _i731.GetGenresRepositoryImp(
         genresBrowseDataSource: gh<_i151.GetGenresBrowseDataSource>()));
+    gh.factory<_i700.WatchlistCubit>(
+        () => _i700.WatchlistCubit(gh<_i925.MovieLocalDataSource>()));
     gh.factory<_i677.SearchViewModel>(
         () => _i677.SearchViewModel(searchUseCase: gh<_i447.SearchUseCase>()));
     gh.factory<_i574.MovieDetailsRepository>(() =>
@@ -118,9 +143,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i697.GetSimilarMoviesUseCase>(() =>
         _i697.GetSimilarMoviesUseCase(
             movieDetailsRepository: gh<_i574.MovieDetailsRepository>()));
-    gh.factory<_i158.GetGenresBrowseUseCase>(() => _i158.GetGenresBrowseUseCase(
-        browseRepository: gh<_i722.GetGenresRepository>()));
     gh.factory<_i129.GetFilterBrowseUseCase>(() => _i129.GetFilterBrowseUseCase(
+        browseRepository: gh<_i722.GetGenresRepository>()));
+    gh.factory<_i158.GetGenresBrowseUseCase>(() => _i158.GetGenresBrowseUseCase(
         browseRepository: gh<_i722.GetGenresRepository>()));
     gh.factory<_i602.HomeScreenViewModel>(() => _i602.HomeScreenViewModel(
           getPopularMoviesUseCase: gh<_i145.GetPopularMoviesUseCase>(),
@@ -138,3 +163,5 @@ extension GetItInjectableX on _i174.GetIt {
     return this;
   }
 }
+
+class _$HiveModule extends _i201.HiveModule {}

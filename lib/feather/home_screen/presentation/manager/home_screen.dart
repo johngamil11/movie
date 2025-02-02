@@ -68,10 +68,14 @@ class HomeScreen extends StatelessWidget {
                                         ));
                                   },
                                   child: MoviesList(
-                                    title: 'New Releases',
+                                    overLow: HomeScreenViewModel.get(context).releaseMovieList[index]
+            .overview.toString(),
+                                    year: HomeScreenViewModel.get(context).releaseMovieList[index].releaseDate.toString(),
+                                    title:  HomeScreenViewModel.get(context).releaseMovieList[index].title.toString(),
                                     moviesReleaseList: HomeScreenViewModel.get(context).releaseMovieList,
                                     image: HomeScreenViewModel.get(context).releaseMovieList[index]
                                         .posterPath.toString(),
+                                    movieId: HomeScreenViewModel.get(context).releaseMovieList[index].id!.toInt(),
                                   )),
 
                       scrollDirection: Axis.horizontal,

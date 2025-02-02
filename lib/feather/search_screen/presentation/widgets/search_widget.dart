@@ -53,7 +53,7 @@ class SearchWidget extends StatelessWidget {
             ),
             onChanged: (value){
               if(debounce?.isActive ?? false) debounce?.cancel();
-              debounce =Timer(Duration(milliseconds: 500), (){
+              debounce =Timer(Duration(milliseconds: 900), (){
                 onSearch(value);
               });
               // onSearch(value);

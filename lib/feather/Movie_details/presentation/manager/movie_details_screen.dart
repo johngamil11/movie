@@ -5,6 +5,9 @@ import 'package:movie/core/utils/color_manager.dart';
 import 'package:movie/core/utils/styles.dart';
 import 'package:movie/feather/Movie_details/presentation/manager/cubit/movie_details_cubit.dart';
 
+import '../../../../core/utils/constants.dart';
+import '../../../watchlist_screen/presentation/manager/cubit/watch_list_cubit.dart';
+
 
 class MovieDetailsScreen extends StatelessWidget {
   String movieId;
@@ -213,7 +216,8 @@ class MovieDetailsScreen extends StatelessWidget {
             ),
           )
         : Center(child: CircularProgressIndicator(color: ColorManager.primary,))
-    )
+    ),
+
       ],
     ) ;
 
