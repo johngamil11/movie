@@ -1,4 +1,6 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,25 +28,26 @@ void main() async {
 
   Bloc.observer = MyBlocObserver();
   configureDependencies();
-  runApp(MultiBlocProvider(providers: [
-    BlocProvider<HomeScreenViewModel>(
-      create: (context) => getIt<HomeScreenViewModel>(),
-    ),
-    BlocProvider<MovieDetailsViewModel>(
-      create: (context) => getIt<MovieDetailsViewModel>(),
-    ),
-    BlocProvider<BrowseScreenViewModel>(
-      create: (context) => getIt<BrowseScreenViewModel>(),
-    ),
-    BlocProvider<SearchViewModel>(
-      create: (context) => getIt<SearchViewModel>(),
-    ),
-    BlocProvider<WatchlistCubit>(
-      create: (context) => getIt<WatchlistCubit>(),
-    ),
-
-
-  ], child: MyApp()));
+  runApp(DevicePreview(
+    enabled: !kReleaseMode,
+    builder: (context) => MultiBlocProvider(providers: [
+      BlocProvider<HomeScreenViewModel>(
+        create: (context) => getIt<HomeScreenViewModel>(),
+      ),
+      BlocProvider<MovieDetailsViewModel>(
+        create: (context) => getIt<MovieDetailsViewModel>(),
+      ),
+      BlocProvider<BrowseScreenViewModel>(
+        create: (context) => getIt<BrowseScreenViewModel>(),
+      ),
+      BlocProvider<SearchViewModel>(
+        create: (context) => getIt<SearchViewModel>(),
+      ),
+      BlocProvider<WatchlistCubit>(
+        create: (context) => getIt<WatchlistCubit>(),
+      ),
+    ], child: MyApp()),
+  ));
 }
 
 class MyApp extends StatelessWidget {

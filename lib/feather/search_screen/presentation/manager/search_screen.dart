@@ -11,21 +11,21 @@ class SearchScreen extends StatelessWidget {
 String search = '';
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SearchViewModel, SearchState>(
-      bloc: SearchViewModel.get(context),
-      builder: (context, state) {
-        return SafeArea(
-          child: Scaffold(
-            backgroundColor: ColorManager.backGround,
-            body: Column(
-              children: [
-                SizedBox(height: 25.h,),
-                SearchWidget(search: search,
-                onSearch: (value){
+    return SafeArea(
+      child: Expanded(
+        child: Column(
+          children: [
+            SearchWidget(
+              search: search,
+              onSearch: (value){
                   search = value ;
                   SearchViewModel.get(context)..search(search);
                 },),
-                Expanded(
+            //  SiedBox(height: 10.h,),
+            BlocBuilder<SearchViewModel, SearchState>(
+              bloc: SearchViewModel.get(context),
+              builder: (context, state) {
+                return Expanded(
                   child: ListView.separated(
                     itemCount: SearchViewModel.get(context).searchList.length,
                     itemBuilder: (context, index) {
@@ -37,31 +37,40 @@ String search = '';
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(25),
                                 color: ColorManager.gray,
-
                               ),
                               child: MoviesView(
-                                image:  SearchViewModel.get(context).searchList[index].posterPath ??'',
-                                movieName: SearchViewModel.get(context).searchList[index].title ??'',
-                                year: SearchViewModel.get(context).searchList[index].releaseDate ??'',
-                                overLow: SearchViewModel.get(context).searchList[index].overview??"",
-
-
+                                image: SearchViewModel.get(context)
+                                        .searchList[index]
+                                        .posterPath ??
+                                    '',
+                                movieName: SearchViewModel.get(context)
+                                        .searchList[index]
+                                        .title ??
+                                    '',
+                                year: SearchViewModel.get(context)
+                                        .searchList[index]
+                                        .releaseDate ??
+                                    '',
+                                overLow: SearchViewModel.get(context)
+                                        .searchList[index]
+                                        .overview ??
+                                    "",
                               )),
                         ),
                       );
                     },
-                    separatorBuilder: (context, index) =>
-                        Container(height: 3.h, color: ColorManager.primary,
-                          width: 15.w,),
+                    separatorBuilder: (context, index) => Container(
+                      height: 3.h,
+                      color: ColorManager.primary,
+                      width: 15.w,
+                    ),
                   ),
-                )
-              ],
+                );
+              },
             ),
-
-
-          ),
-        );
-      },
+          ],
+        ),
+      ),
     );
   }
 }

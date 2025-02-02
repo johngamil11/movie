@@ -26,19 +26,28 @@ class MoviesList extends StatelessWidget {
                   children: [
                     Container(
                       clipBehavior: Clip.antiAlias,
-                      height: 180,
-                      width: 120,
-                      margin: EdgeInsets.all(4),
+          height: 180.h,
+          width: 120.w,
+          margin: EdgeInsets.all(4),
                       decoration: BoxDecoration(
-                        color: Colors.yellowAccent,
                         borderRadius: BorderRadius.circular(25)
                       ),
                       child: Image.network(
                         // 'assets/images/Imagecover.png'
                           AppConstants.image_link +image,
                         fit: BoxFit.fill,
-                      ),
-                    ),
+              loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) {
+              return child;
+            } else {
+              return Center(
+                child: CircularProgressIndicator(
+                  color: ColorManager.primary,
+                ),
+              );
+            }
+          }),
+        ),
                     InkWell(
                       onTap: (){
                         WatchlistCubit.get(context).addMovie(MovieModel(

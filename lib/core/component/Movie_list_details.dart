@@ -33,14 +33,23 @@ class MovieListDetails extends StatelessWidget {
           width: 120,
           margin: EdgeInsets.all(4),
           decoration: BoxDecoration(
-              color: Colors.yellowAccent,
               borderRadius: BorderRadius.circular(25)
           ),
           child: Image.network(
             // 'assets/images/Imagecover.png'
             AppConstants.image_link +image,
             fit: BoxFit.fill,
-          ),
+              loadingBuilder: (context, child, loadingProgress) {
+            if (loadingProgress == null) {
+              return child;
+            } else {
+              return Center(
+                child: CircularProgressIndicator(
+                  color: ColorManager.primary,
+                ),
+              );
+            }
+          }),
         ),
         Row(
           children: [

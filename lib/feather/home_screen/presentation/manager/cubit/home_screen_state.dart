@@ -4,7 +4,9 @@ part of 'home_screen_cubit.dart';
 sealed class HomeScreenState {}
 
 final class HomeScreenInitial extends HomeScreenState {}
+
 final class HomeScreenLoadingState extends HomeScreenState {}
+
 final class HomeScreenSuccessState extends HomeScreenState {
   // MovieDetailsEntity movieDetails ;
 // GetPopularMoviesResponseEntity getPopularMoviesResponseEntity ;

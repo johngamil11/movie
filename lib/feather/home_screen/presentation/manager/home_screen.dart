@@ -28,8 +28,7 @@ class HomeScreen extends StatelessWidget {
         // GetMovieDetailsResponseEntity getMovieDetailsResponseEntity ;
         return Scaffold(
             backgroundColor: ColorManager.backGround,
-            body:
-            state is HomeScreenSuccessState ?
+            body: state is HomeScreenSuccessState ?
             SingleChildScrollView(
               child: Column(
                 children: [
@@ -46,10 +45,6 @@ class HomeScreen extends StatelessWidget {
                     height: 250.h,
                     color: ColorManager.gray,
                     child:
-                    // MoviesList(
-                      // title: 'New Releases',
-                      // movieDetails:,
-                    // ),
                     ListView.separated(
                       padding: REdgeInsets.only(
                         top: 12.87,
@@ -69,7 +64,8 @@ class HomeScreen extends StatelessWidget {
                                   },
                                   child: MoviesList(
                                     overLow: HomeScreenViewModel.get(context).releaseMovieList[index]
-            .overview.toString(),
+                                        .overview
+                                        .toString(),
                                     year: HomeScreenViewModel.get(context).releaseMovieList[index].releaseDate.toString(),
                                     title:  HomeScreenViewModel.get(context).releaseMovieList[index].title.toString(),
                                     moviesReleaseList: HomeScreenViewModel.get(context).releaseMovieList,
@@ -77,8 +73,7 @@ class HomeScreen extends StatelessWidget {
                                         .posterPath.toString(),
                                     movieId: HomeScreenViewModel.get(context).releaseMovieList[index].id!.toInt(),
                                   )),
-
-                      scrollDirection: Axis.horizontal,
+                              scrollDirection: Axis.horizontal,
                       itemCount:HomeScreenViewModel.get(context).releaseMovieList.length,
                       separatorBuilder: (context, index) =>
                           SizedBox(
