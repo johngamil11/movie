@@ -6,6 +6,7 @@ class AssetsImage {
   static const String searchIcon = 'assets/images/search_icon.png' ;
   static const String watchlistIcon = 'assets/images/watchlist_icon.png' ;
   static const String bookMark = 'assets/images/bookmark.png' ;
+  static const String bookMarkDone = 'assets/images/bookmarkDone.png' ;
   static const String action = 'assets/images/action.jpg' ;
   static const String adventure = 'assets/images/adventure.jpg' ;
   static const String animation = 'assets/images/animation-.jpg' ;
